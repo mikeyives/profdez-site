@@ -1,4 +1,3 @@
- 
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -156,11 +155,16 @@
             box-shadow: 0 5px 20px rgba(0,0,0,0.05);
             transition: transform 0.3s, box-shadow 0.3s;
             border-top: 5px solid #2e86c1;
+            cursor: pointer; /* Добавлено: курсор-рука */
         }
 
         .service-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .service-card:hover span {
+            text-decoration: underline; /* Подчеркивание при наведении */
         }
 
         .service-icon {
@@ -280,6 +284,54 @@
             font-size: 14px;
         }
 
+        /* Стили для модального окна */
+        .modal {
+            display: none; /* Скрыто по умолчанию */
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); /* Затемнение фона */
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Контент внутри окна */
+        .modal-content {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* Кнопка закрытия (крестик) */
+        .close-btn {
+            color: #aaa;
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-btn:hover {
+            color: #e74c3c;
+        }
+
+        /* Анимация появления */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         /* Адаптивность для мобильных */
         @media (max-width: 768px) {
             .header-container {
@@ -329,26 +381,29 @@
         <h2 class="section-title">Наши услуги</h2>
         <div class="services-grid">
             
-            <!-- Дезинсекция -->
-            <div class="service-card">
-                <i class="fa-solid fa-bug service-icon"></i>
-                <h3>Дезинсекция</h3>
-                <p>Уничтожение насекомых и их личинок. Избавим от тараканов, клопов, муравьев и других вредителей.</p>
-            </div>
+           <!-- Карточка 1 -->
+           <div class="service-card" onclick="openModal('insect')">
+               <i class="fa-solid fa-bug service-icon"></i>
+               <h3>Дезинсекция</h3>
+               <p>Уничтожение насекомых и их личинок. Избавим от тараканов, клопов, муравьев.</p>
+               <span style="color: #2e86c1; font-weight: bold; margin-top: 15px; display: block;">Подробнее →</span>
+           </div>
 
-            <!-- Дезинфекция -->
-            <div class="service-card">
-                <i class="fa-solid fa-spray-can service-icon"></i>
-                <h3>Дезинфекция</h3>
-                <p>Устранение вирусов, бактерий и грибков. Обработка помещений для вашей безопасности и здоровья.</p>
-            </div>
+           <!-- Карточка 2 -->
+           <div class="service-card" onclick="openModal('disinfect')">
+               <i class="fa-solid fa-spray-can service-icon"></i>
+               <h3>Дезинфекция</h3>
+               <p>Устранение вирусов, бактерий и грибков. Обработка помещений для вашей безопасности.</p>
+               <span style="color: #2e86c1; font-weight: bold; margin-top: 15px; display: block;">Подробнее →</span>
+           </div>
 
-            <!-- Дератизация -->
-            <div class="service-card">
-                <i class="fa-solid fa-paw service-icon"></i>
-                <h3>Дератизация</h3>
-                <p>Уничтожение грызунов и предотвращение их появления. Комплексные меры защиты от крыс и мышей.</p>
-            </div>
+           <!-- Карточка 3 -->
+           <div class="service-card" onclick="openModal('derat')">
+               <i class="fa-solid fa-paw service-icon"></i>
+               <h3>Дератизация</h3>
+               <p>Уничтожение грызунов и предотвращение их появления. Комплексные меры защиты.</p>
+               <span style="color: #2e86c1; font-weight: bold; margin-top: 15px; display: block;">Подробнее →</span>
+           </div>
 
         </div>
     </section>
@@ -381,9 +436,9 @@
             <div class="contact-form">
                 <h3 style="margin-bottom: 20px; color: #003580;">Заявка на обработку</h3>
                 <form id="orderForm">
-                    <input type="text" placeholder="Ваше имя" required>
-                    <input type="tel" placeholder="Ваш телефон" required>
-                    <textarea rows="4" placeholder="Опишите проблему (например: тараканы на кухне)"></textarea>
+                    <input type="text" name="name" placeholder="Ваше имя" required>
+                    <input type="tel" name="phone" placeholder="Ваш телефон" required>
+                    <textarea name="message" rows="4" placeholder="Опишите проблему (например: тараканы на кухне)"></textarea>
                     <button type="submit">Отправить заявку</button>
                 </form>
             </div>
@@ -396,7 +451,16 @@
         <p>&copy; 2026 ООО "Профдезинфекция Плюс". Все права защищены.</p>
     </footer>
 
-    <!-- Скрипт для обработки формы (демо) -->
+    <!-- Модальное окно (скрыто по умолчанию) -->
+    <div id="serviceModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle" style="color: #003580; margin-bottom: 20px;"></h2>
+            <div id="modalText" style="font-size: 16px; line-height: 1.6; color: #444;"></div>
+        </div>
+    </div>
+
+    <!-- Скрипты -->
     <script>
         // Плавный скролл к секциям
         document.querySelectorAll('nav a, .btn').forEach(anchor => {
@@ -417,6 +481,78 @@
             alert('Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время. (Демо-режим)');
             this.reset();
         });
+
+        // База данных с подробными описаниями для модального окна
+        const serviceDetails = {
+            'insect': {
+                title: 'Дезинсекция: подробности',
+                text: `
+                    <p><strong>Мы избавим вас от:</strong></p>
+                    <ul style="margin-left: 20px; margin-bottom: 15px;">
+                        <li>Тараканов (прусаков)</li>
+                        <li>Постельных клопов</li>
+                        <li>Муравьев, блох, мух, комаров</li>
+                    </ul>
+                    <p><strong>Как мы работаем:</strong></p>
+                    <p>Используем современные сертифицированные препараты (концентраты и гели). Метод холодного и горячего тумана позволяет обработать даже труднодоступные места. Препараты безопасны для людей и домашних животных при соблюдении инструкции.</p>
+                    <p style="margin-top: 15px; color: #e74c3c; font-weight: bold;">Гарантия на результат: до 12 месяцев!</p>
+                `
+            },
+            'disinfect': {
+                title: 'Дезинфекция: подробности',
+                text: `
+                    <p>Профессиональная обработка помещений для уничтожения болезнетворных микроорганизмов.</p>
+                    <p><strong>Когда это необходимо:</strong></p>
+                    <ul style="margin-left: 20px; margin-bottom: 15px;">
+                        <li>Профилактика вирусных инфекций (в т.ч. грипп, COVID-19)</li>
+                        <li>Устранение плесени и грибка на стенах</li>
+                        <li>Обработка после затоплений и длительного отсутствия жильцов</li>
+                    </ul>
+                    <p>Мы используем только качественные дезинфицирующие средства, разрешенные к применению в быту и на предприятиях общественного питания.</p>
+                `
+            },
+            'derat': {
+                title: 'Дератизация: подробности',
+                text: `
+                    <p>Комплексная борьба с грызунами (крысы, мыши).</p>
+                    <p><strong>Наши методы:</strong></p>
+                    <ul style="margin-left: 20px; margin-bottom: 15px;">
+                        <li>Использование безопасных приманок в специальных контейнерах (защита от детей и животных)</li>
+                        <li>Установка механических ловушек и клеевых домиков</li>
+                        <li>Заделка путей проникновения грызунов (герметизация щелей)</li>
+                    </ul>
+                    <p>Мы не просто травим грызунов, мы проводим профилактику, чтобы они не вернулись снова. Работаем с частными домами, квартирами, складами и магазинами.</p>
+                `
+            }
+        };
+
+        // Функция открытия окна
+        function openModal(serviceId) {
+            const data = serviceDetails[serviceId];
+            if (data) {
+                document.getElementById('modalTitle').innerHTML = data.title;
+                document.getElementById('modalText').innerHTML = data.text;
+                
+                const modal = document.getElementById('serviceModal');
+                modal.style.display = 'flex'; // Показываем окно
+                document.body.style.overflow = 'hidden'; // Запрещаем прокрутку фона
+            }
+        }
+
+        // Функция закрытия окна
+        function closeModal() {
+            const modal = document.getElementById('serviceModal');
+            modal.style.display = 'none'; // Скрываем окно
+            document.body.style.overflow = 'auto'; // Возвращаем прокрутку
+        }
+
+        // Закрытие окна при клике мимо него (на темный фон)
+        window.onclick = function(event) {
+            const modal = document.getElementById('serviceModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
     </script>
 </body>
 </html>
