@@ -1,0 +1,422 @@
+ 
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ООО "Профдезинфекция Плюс" | Шахтерск</title>
+    <!-- Подключение шрифтов и иконок -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Базовые настройки */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Шапка сайта */
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: #003580;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #555;
+            margin-left: 20px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #2e86c1;
+        }
+
+        /* Главный экран (Hero) */
+        .hero {
+            background: linear-gradient(135deg, #003580 0%, #2e86c1 100%);
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Декоративный элемент на фоне */
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: #f4f7f6;
+            border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 30px auto;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn:hover {
+            background-color: #43a047;
+            transform: translateY(-3px);
+        }
+
+        /* Секция услуг */
+        .services {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 32px;
+            color: #003580;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60%;
+            height: 3px;
+            background-color: #2e86c1;
+            margin: 10px auto 0 auto;
+            border-radius: 2px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 40px 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 5px solid #2e86c1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .service-icon {
+            font-size: 50px;
+            color: #2e86c1;
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 22px;
+            color: #003580;
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        /* Секция контактов */
+        .contact {
+            background-color: #ffffff;
+            padding: 60px 20px;
+        }
+
+        .contact-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .contact-info h3 {
+            color: #003580;
+            font-size: 24px;
+            margin-bottom: 25px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .contact-item i {
+            color: #2e86c1;
+            font-size: 24px;
+            margin-right: 15px;
+            margin-top: 3px;
+        }
+
+        .contact-item a {
+            color: #333;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-item a:hover {
+            color: #2e86c1;
+        }
+
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+            background: #f9f9f9;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .contact-form input:focus, .contact-form textarea:focus {
+            border-color: #2e86c1;
+        }
+
+        .contact-form button {
+            width: 100%;
+            background-color: #003580;
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .contact-form button:hover {
+            background-color: #2e86c1;
+        }
+
+        /* Подвал */
+        footer {
+            background-color: #003580;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+        }
+
+        /* Адаптивность для мобильных */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            nav {
+                margin-top: 15px;
+            }
+            nav a {
+                margin: 0 10px;
+            }
+            .hero h1 {
+                font-size: 28px;
+            }
+            .hero p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Шапка -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fa-solid fa-shield-virus" style="margin-right: 8px;"></i>
+                ООО "Профдезинфекция Плюс"
+            </div>
+            <nav>
+                <a href="#services">Услуги</a>
+                <a href="#contacts">Контакты</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Главный баннер -->
+    <section class="hero">
+        <h1>Надежная защита вашего дома и бизнеса</h1>
+        <p>Профессиональное уничтожение насекомых, грызунов и вредоносных микроорганизмов. Безопасно, быстро и с гарантией результата.</p>
+        <a href="#contacts" class="btn">Оставить заявку</a>
+    </section>
+
+    <!-- Услуги -->
+    <section class="services" id="services">
+        <h2 class="section-title">Наши услуги</h2>
+        <div class="services-grid">
+            
+            <!-- Дезинсекция -->
+            <div class="service-card">
+                <i class="fa-solid fa-bug service-icon"></i>
+                <h3>Дезинсекция</h3>
+                <p>Уничтожение насекомых и их личинок. Избавим от тараканов, клопов, муравьев и других вредителей.</p>
+            </div>
+
+            <!-- Дезинфекция -->
+            <div class="service-card">
+                <i class="fa-solid fa-spray-can service-icon"></i>
+                <h3>Дезинфекция</h3>
+                <p>Устранение вирусов, бактерий и грибков. Обработка помещений для вашей безопасности и здоровья.</p>
+            </div>
+
+            <!-- Дератизация -->
+            <div class="service-card">
+                <i class="fa-solid fa-paw service-icon"></i>
+                <h3>Дератизация</h3>
+                <p>Уничтожение грызунов и предотвращение их появления. Комплексные меры защиты от крыс и мышей.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section class="contact" id="contacts">
+        <div class="contact-container">
+            
+            <div class="contact-info">
+                <h3>Свяжитесь с нами</h3>
+                <p style="margin-bottom: 30px; color: #666;">Оставьте заявку, и наш специалист проконсультирует вас по любым вопросам обработки.</p>
+                
+                <div class="contact-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <div>
+                        <strong>Адрес:</strong><br>
+                        г. Шахтерск, ул. Берегового, д. 7а
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    <div>
+                        <strong>Электронная почта:</strong><br>
+                        <a href="mailto:shah.profdez2022@yandex.com">shah.profdez2022@yandex.com</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <h3 style="margin-bottom: 20px; color: #003580;">Заявка на обработку</h3>
+                <form id="orderForm">
+                    <input type="text" placeholder="Ваше имя" required>
+                    <input type="tel" placeholder="Ваш телефон" required>
+                    <textarea rows="4" placeholder="Опишите проблему (например: тараканы на кухне)"></textarea>
+                    <button type="submit">Отправить заявку</button>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer>
+        <p>&copy; 2024 ООО "Профдезинфекция Плюс". Все права защищены.</p>
+    </footer>
+
+    <!-- Скрипт для обработки формы (демо) -->
+    <script>
+        // Плавный скролл к секциям
+        document.querySelectorAll('nav a, .btn').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if(target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Обработка формы (показывает сообщение, так как реальная отправка требует сервера)
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время. (Демо-режим)');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
